@@ -8871,9 +8871,101 @@
     "name": "solc",
     "version": "0.5.8+commit.23d335f2.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {
+        "0x08b2c0469ecd1d7a21d7e1492f0fc75fc7e8e0fa4fdf4275949c90875f5ebdf5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_value",
+              "type": "bool"
+            }
+          ],
+          "name": "UpdateWhitelist",
+          "type": "event",
+          "signature": "0x08b2c0469ecd1d7a21d7e1492f0fc75fc7e8e0fa4fdf4275949c90875f5ebdf5"
+        },
+        "0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Received",
+          "type": "event",
+          "signature": "0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874"
+        },
+        "0x6d4a868d9686051f889f61dc96415c0809f248cd6ce33eb543ff445b972084fe": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sig",
+              "type": "bytes"
+            },
+            {
+              "indexed": false,
+              "name": "signer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "destination",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "data",
+              "type": "bytes"
+            },
+            {
+              "indexed": false,
+              "name": "rewardToken",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "rewardAmount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_hash",
+              "type": "bytes32"
+            }
+          ],
+          "name": "Forwarded",
+          "type": "event",
+          "signature": "0x6d4a868d9686051f889f61dc96415c0809f248cd6ce33eb543ff445b972084fe"
+        }
+      },
+      "links": {},
+      "address": "0x49E6fb551A865C42EC97e1b59b2b687928489Cff",
+      "transactionHash": "0xe7b1ac3b79a78d7867c1a42e15d17a4eef57f283816324431ea46234a825a4b0"
+    }
+  },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-26T06:03:11.854Z",
+  "updatedAt": "2019-10-26T12:26:52.418Z",
   "devdoc": {
     "methods": {}
   },
