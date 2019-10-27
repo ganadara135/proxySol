@@ -15,6 +15,7 @@ contract KingToken is ERC20Mintable {
   uint public constant INITIAL_SUPPLY = 1000 * (10 ** decimals);
   //mapping (address => uint256) private _balances;
   address public owner;
+  uint public constant feeOfregister = 50;
   // 테스트 체크용 상태 변수
   uint public count = 0;
 
@@ -51,12 +52,12 @@ contract KingToken is ERC20Mintable {
   //  게시글 등록시 호출하는 메소드, 게시글 등록시에 50 토큰이 차감됨
   function registerArticle(address _to)  public returns (bool) {
     require(_to != address(0),"ERC20: using from the zero address");
-    require(balanceOf(_to) > 50, "Not enough token");
+    require(balanceOf(_to) > feeOfregister, "Not enough token");
 
     //_balances[_to] = _balances[_to].sub(50);    // 50  토큰 차감 (KingToken)
-    _burn(_to, 50);
+    _burn(_to, feeOfregister);
 
-    emit Register(_to, 50);  // 첫번재 인자는 Null
+    emit Register(_to, feeOfregister);  // 첫번재 인자는 Null
     return true;
   }
 

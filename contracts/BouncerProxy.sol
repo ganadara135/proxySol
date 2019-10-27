@@ -14,6 +14,8 @@ contract BouncerProxy {
 
   event UpdateWhitelist(address _account, bool _value);
   event Received (address indexed sender, uint value);
+
+
   function () external payable {
     emit Received(msg.sender, msg.value);
   }
@@ -39,13 +41,14 @@ contract BouncerProxy {
       require(signerIsWhitelisted(_hash,sig),"BouncerProxy::forward Signer is not whitelisted");
       //make sure the signer pays in whatever token (or ether) the sender and signer agreed to
       // or skip this if the sender is incentivized in other ways and there is no need for a token
+      // 이 부분은 현재 프로젝트에는 필요치 않음
       if(rewardAmount>0){
         //Address 0 mean reward with ETH
         if(rewardToken==address(0)){
           //REWARD ETHER
           //require(msg.sender.call.value(rewardAmount)(''),'Not enough for gas');
           //require(msg.sender.call.value(rewardAmount)(""),"ppp");
-          require(msg.sender.send(rewardAmount),"bock send reward");
+          require(msg.sender.send(rewardAmount),"block send reward");
 
         }else{
           //REWARD TOKEN
@@ -96,10 +99,16 @@ contract BouncerProxy {
       return false;
     } else {
       // solium-disable-next-line arg-overflow
-      return whitelist[ecrecover(keccak256(
+      return whitelist[ecrecover(keccak256(             // ecrecover 는 opcode 임, 어셈블리 코드
         abi.encodePacked("\x19Ethereum Signed Message:\n32", _hash)
       ), v, r, s)];
     }
+  }
+
+
+  // only for test
+  function ecrecoverCustom(bytes32 msgHash, uint8 v, bytes32 r, bytes32 s) public pure returns (address) {
+    return ecrecover(msgHash, v, r, s);
   }
 }
 
