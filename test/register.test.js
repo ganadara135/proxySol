@@ -71,7 +71,7 @@ contract("KingToken", (accounts) => {
 });
 
 
-contract.only("BouncerProxy", async (accounts) => {
+contract("BouncerProxy", async (accounts) => {
     // 화이트리스트에 등록되었는지 확인,
     describe('#BouncerProxy 작동여부 체크', async function() {
         it("whitelist msg.sender 체크", () => {
