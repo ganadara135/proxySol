@@ -17,18 +17,27 @@
 
 
 # Docker 실행 방법                                                          <br>
-# 열어주는 포트  9545, 3000, 3001                                            <br>
-\> docker run -it -p 9545:9545 -p 3000:3000 -p 3001:3001  --volume=$(pwd):/proxy/  --name proxySol -d node <br>
+# 열어주는 포트  9545, 8545, 3000, 3001                                            <br>
+\> docker run -it -p 9545:9545 -p 8545:8545 -p 3000:3000 -p 3001:3001  --volume=$(pwd):/proxy/  --name proxySol -d node <br>
 \> npm i -g n                                                               <br>
-\> n stable                                                                 <br>
+\> n 10.16.0                                                                 <br>
 \> node -v      // 버전 체크, 안 바뀔수가 있으면, 현재 truffle 은  node version 10.1^.0 에서 정상 작동함   <br>
 \> npm i                                                                    <br>
 \> npm i --unsafe-perm -g truffle                                           <br>
 \> truffle develop                                                          <br>
-
+\> npm i -g ganache-cli
 <br>
 
-## ----------------   truffle 내부에서         <br>
-\>> compile                                 <br>
-\>> migrate                                  <br>
-\>> test                                     <br>
+##   ganache-cli    서버 가동                                                <br>
+\>>  npx ganache-cli                                                         <br>
+
+
+##   truffle 가동                                                           <br>
+\>> truffle console --network development                                 <br>
+\>> compile                                                                  <br>
+\>> migrate --reset                                                              <br>
+\>> test                                                                     <br>
+
+
+##  truffle 테스트 결과 캡처
+![test capture](https://user-images.githubusercontent.com/24896007/67766404-b4adc600-fa91-11e9-9fa3-292b7beeb821.png)

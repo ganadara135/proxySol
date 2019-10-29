@@ -14,7 +14,7 @@ contract BouncerProxy {
 
   event UpdateWhitelist(address _account, bool _value);
   event Received (address indexed sender, uint value);
-
+  event LogMessage (address what);
 
   function () external payable {
     emit Received(msg.sender, msg.value);
@@ -33,6 +33,9 @@ contract BouncerProxy {
   }
 
   function forward(bytes memory sig, address signer, address destination, uint value, bytes memory data, address rewardToken, uint rewardAmount) public {
+      // msg.sender log to see
+      emit LogMessage(msg.sender);
+      
       //the hash contains all of the information about the meta transaction to be called
       bytes32 _hash = getHash(signer, destination, value, data, rewardToken, rewardAmount);
       //increment the hash so this tx can't run again

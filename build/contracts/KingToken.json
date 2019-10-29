@@ -5760,12 +5760,587 @@
         }
       },
       "links": {},
-      "address": "0x527D44cE8ED6833e16d28b238F44BD70Ce76b340",
-      "transactionHash": "0x9b0fbb642a69fbf94f69d49abe33862160b96aeebbb58b32fa67506f9b5537e2"
+      "address": "0xB83cdC716869D4be69fE133c257c9a6785e74E7f",
+      "transactionHash": "0x380939bd1fb88fcabd1dd37afd2bb292ae9231ae86d925c67c07a6149b57f7fb"
+    },
+    "1572345292479": {
+      "events": {
+        "0x007dc6ab80cc84c043b7b8d4fcafc802187470087f7ea7fccd2e17aecd0256a1": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_writer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Register",
+          "type": "event",
+          "signature": "0x007dc6ab80cc84c043b7b8d4fcafc802187470087f7ea7fccd2e17aecd0256a1"
+        },
+        "0xfd06ceed330aa43e36de6c1a54e7e9f2d50932dd62ecb5bf6f9aa8fa8a9c441b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_receiver",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "MintAirDrop",
+          "type": "event",
+          "signature": "0xfd06ceed330aa43e36de6c1a54e7e9f2d50932dd62ecb5bf6f9aa8fa8a9c441b"
+        },
+        "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "MinterAdded",
+          "type": "event",
+          "signature": "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6"
+        },
+        "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "MinterRemoved",
+          "type": "event",
+          "signature": "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event",
+          "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        },
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event",
+          "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+        }
+      },
+      "links": {},
+      "address": "0x293B1f88f3492A9Cf937f701ec70Cbf1a275B2C9",
+      "transactionHash": "0x4d4071dc80a6a5140891a93ce32a71b5a18d0bd94c616f552c9a31c9612c3480"
+    },
+    "1572346380427": {
+      "events": {
+        "0x007dc6ab80cc84c043b7b8d4fcafc802187470087f7ea7fccd2e17aecd0256a1": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_writer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Register",
+          "type": "event",
+          "signature": "0x007dc6ab80cc84c043b7b8d4fcafc802187470087f7ea7fccd2e17aecd0256a1"
+        },
+        "0xfd06ceed330aa43e36de6c1a54e7e9f2d50932dd62ecb5bf6f9aa8fa8a9c441b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_receiver",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "MintAirDrop",
+          "type": "event",
+          "signature": "0xfd06ceed330aa43e36de6c1a54e7e9f2d50932dd62ecb5bf6f9aa8fa8a9c441b"
+        },
+        "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "MinterAdded",
+          "type": "event",
+          "signature": "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6"
+        },
+        "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "MinterRemoved",
+          "type": "event",
+          "signature": "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event",
+          "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        },
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event",
+          "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+        }
+      },
+      "links": {},
+      "address": "0x851eF49600867099FC0BBf28a8c5B1980Cc66684",
+      "transactionHash": "0xac3067d179f4b0f8e6ea234218878810466cf418692689032851630271754ab6"
+    },
+    "1572347562738": {
+      "events": {
+        "0x007dc6ab80cc84c043b7b8d4fcafc802187470087f7ea7fccd2e17aecd0256a1": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_writer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Register",
+          "type": "event",
+          "signature": "0x007dc6ab80cc84c043b7b8d4fcafc802187470087f7ea7fccd2e17aecd0256a1"
+        },
+        "0xfd06ceed330aa43e36de6c1a54e7e9f2d50932dd62ecb5bf6f9aa8fa8a9c441b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_receiver",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "MintAirDrop",
+          "type": "event",
+          "signature": "0xfd06ceed330aa43e36de6c1a54e7e9f2d50932dd62ecb5bf6f9aa8fa8a9c441b"
+        },
+        "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "MinterAdded",
+          "type": "event",
+          "signature": "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6"
+        },
+        "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "MinterRemoved",
+          "type": "event",
+          "signature": "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event",
+          "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        },
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event",
+          "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+        }
+      },
+      "links": {},
+      "address": "0xd27Be9b30C9FD50A9c7a66cEde061C7B9054A1ba",
+      "transactionHash": "0x4568e2f696e116755b0c15bc14e45aa1f99d475cb3bc2b5ae125185092440889"
+    },
+    "1572348712600": {
+      "events": {
+        "0x007dc6ab80cc84c043b7b8d4fcafc802187470087f7ea7fccd2e17aecd0256a1": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_writer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Register",
+          "type": "event",
+          "signature": "0x007dc6ab80cc84c043b7b8d4fcafc802187470087f7ea7fccd2e17aecd0256a1"
+        },
+        "0xfd06ceed330aa43e36de6c1a54e7e9f2d50932dd62ecb5bf6f9aa8fa8a9c441b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_receiver",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "MintAirDrop",
+          "type": "event",
+          "signature": "0xfd06ceed330aa43e36de6c1a54e7e9f2d50932dd62ecb5bf6f9aa8fa8a9c441b"
+        },
+        "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "MinterAdded",
+          "type": "event",
+          "signature": "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6"
+        },
+        "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "MinterRemoved",
+          "type": "event",
+          "signature": "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event",
+          "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        },
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event",
+          "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+        }
+      },
+      "links": {},
+      "address": "0xdfDe721e1B0B40ccc2a26F364BAC9A918dd64ffc",
+      "transactionHash": "0x0727fcc10fc430cb85c09b9df3b44a1b99d91de9215623e50d274e92c618f214"
+    },
+    "1572350929747": {
+      "events": {
+        "0x007dc6ab80cc84c043b7b8d4fcafc802187470087f7ea7fccd2e17aecd0256a1": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_writer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Register",
+          "type": "event",
+          "signature": "0x007dc6ab80cc84c043b7b8d4fcafc802187470087f7ea7fccd2e17aecd0256a1"
+        },
+        "0xfd06ceed330aa43e36de6c1a54e7e9f2d50932dd62ecb5bf6f9aa8fa8a9c441b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_receiver",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "MintAirDrop",
+          "type": "event",
+          "signature": "0xfd06ceed330aa43e36de6c1a54e7e9f2d50932dd62ecb5bf6f9aa8fa8a9c441b"
+        },
+        "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "MinterAdded",
+          "type": "event",
+          "signature": "0x6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f6"
+        },
+        "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "MinterRemoved",
+          "type": "event",
+          "signature": "0xe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb66692"
+        },
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event",
+          "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        },
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event",
+          "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+        }
+      },
+      "links": {},
+      "address": "0xdE77eA2e47712581b7CA4025831683E93f047d9e",
+      "transactionHash": "0xc28092dfc13ed50b7f108fd3d4d069956fd724cf329ad223b41317c283bfe5e5"
     }
   },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-27T05:02:15.421Z",
+  "updatedAt": "2019-10-29T12:10:21.583Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {

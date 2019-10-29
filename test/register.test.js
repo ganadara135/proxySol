@@ -6,7 +6,10 @@ const KingToken = artifacts.require("KingToken");
 const BouncerProxy = artifacts.require("BouncerProxy");
 
 //web3 = new Web3(new Web3.providers.HttpProvider(clevisConfig.provider))
-const web3 = new Web3(new Web3.providers.WebsocketProvider("ws://localhost:9545"));
+// const web3 = new Web3() // 'ws://127.0.0.1:9545');
+// const eventProvider = new Web3.providers.WebsocketProvider('ws://localhost:9545');
+// web3.setProvider(eventProvider);
+const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'))
 //const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
 // web3.eth.personal.sign("Hello world", "0x7ca0774532c0287a05a1786bd7966d8a5c467cf0", "a27b1b366a4f527d920cc17e46949b996ee4c4ee4b7b0b28b7f75fbe8c0d1c56")
 // .then( result => console.log("result : ", result));
@@ -70,8 +73,56 @@ contract("KingToken", (accounts) => {
     });
 });
 
+/*
+    // 시그니처 만들기 테스트용 // 정상 작동 확인
+    // await web3.eth.personal.sign("Hello world", "0x7ca0774532c0287a05a1786bd7966d8a5c467cf0", "a27b1b366a4f527d920cc17e46949b996ee4c4ee4b7b0b28b7f75fbe8c0d1c56")
+    const message = EthUtil.keccak256('Message to sign here.')          // return Buffer
+                                    // ecsign(Buffer msgHash, Buffer privateKey, chainId)
+    const signature = await EthUtil.ecsign(message, new Buffer('02c03f3cd759719eb51ff3e2a42a901082d69378659ea19a9056cc91c70b4260', 'hex') ) // return Object
+                                                            //0x02c03f3cd759719eb51ff3e2a42a901082d69378659ea19a9056cc91c70b4260
+                                                            // ganache 에 5 번째 주소 사용해서 메소드 호출 account[5]
+    console.log("message : ", web3.utils.bytesToHex(message))
+    console.log("signature.r : ", signature.r)
+    console.log("signature.s : ", signature.s)
+    console.log("signature.v : ", web3.utils.toHex(signature.v))
+    // message 와   signature  를  전달         // String, String
+    accountClient = web3.eth.accounts.recover({
+        messageHash: web3.utils.bytesToHex(message),
+        r: web3.utils.bytesToHex(signature.r),
+        s: web3.utils.bytesToHex(signature.s),
+        v: web3.utils.toHex(signature.v)
+    });
+    console.log("계좌 비교 원본 : ", accounts[5])
+    console.log("계좌 비교 생성 : ", accountClient)
+    // 위 계좌 비교가 통과하면 아래 메소드를 실행
+*/    
+
+
+
 
 contract("BouncerProxy", async (accounts) => {
+
+
+    // 백엔드 서버에서 할 일
+    describe('#호출요청자 검증', async function() {
+      //  console.log(accounts)
+        it("시그니처 검증", async function() {
+
+            // 게시판 쪽에서 할 행위 가정한 데이터 message,  signature
+            const message = await EthUtil.keccak256('Message to sign here.')          // return Buffer
+            const signature = await EthUtil.ecsign(message, new Buffer('e38b4379f0f60e1a0cd3ef420bb99ab87408aca197ed364df05ed8431027bc18', 'hex') ) // return Object
+                                                                    // ganache 에 5 번째 주소 사용해서 메소드 호출 account[5]
+            accountClient = web3.eth.accounts.recover({
+                messageHash: web3.utils.bytesToHex(message),
+                r: web3.utils.bytesToHex(signature.r),
+                s: web3.utils.bytesToHex(signature.s),
+                v: web3.utils.toHex(signature.v)
+            });
+            accountClient.should.be.equal(accounts[5], 'The recovered address should match the signing address')
+        });
+    })
+
+
     // 화이트리스트에 등록되었는지 확인,
     describe('#BouncerProxy 작동여부 체크', async function() {
         it("whitelist msg.sender 체크", () => {
@@ -86,44 +137,6 @@ contract("BouncerProxy", async (accounts) => {
         });
     });
 
-
-    // 시그니처 만들기  
-    // let signature;
-    // await web3.eth.personal.sign("Hello world", "0x7ca0774532c0287a05a1786bd7966d8a5c467cf0", "a27b1b366a4f527d920cc17e46949b996ee4c4ee4b7b0b28b7f75fbe8c0d1c56")
-    const message = EthUtil.keccak256('Message to sign here.')          // return Buffer
-                                    // ecsign(Buffer msgHash, Buffer privateKey, chainId)
-    const signature = await EthUtil.ecsign(message, new Buffer('a27b1b366a4f527d920cc17e46949b996ee4c4ee4b7b0b28b7f75fbe8c0d1c56', 'hex') ) // return Object
-
-    console.log("message : ", web3.utils.bytesToHex(message))
-    console.log("signature.r : ", signature.r)
-    console.log("signature.s : ", signature.s)
-    console.log("signature.v : ", web3.utils.toHex(signature.v))
-    // message 와   signature  를  전달         // String, String
-    accountClient = web3.eth.accounts.recover({
-        messageHash: web3.utils.bytesToHex(message),
-        r: web3.utils.bytesToHex(signature.r),
-        s: web3.utils.bytesToHex(signature.s),
-        v: web3.utils.toHex(signature.v)
-    });
-    console.log("계좌 비교 원본 : ", accounts[0])
-    console.log("계좌 비교 생성 : ", accountClient)
-    // 위 계좌 비교가 통과하면 아래 메소드를 실행
-    
-/*
-    let accountClient;
-    let metaTxData;
-    // 클라이언트가 보내주는 메시지 파싱
-    describe('#Client Msg Parsing ', async function(clientMsg) {
-        it("Parsing 고객들이 보내는 파일 ", (clientMsg) => {
-            console.log("clientMsg:",clientMsg)
-            metaTxData = JSON.parse(clientMsg.data)
-            console.log(metaTxData)
-            console.log("/tx",metaTxData)
-            accountClient = web3.eth.accounts.recover(metaTxData.message,metaTxData.sig)
-            console.log("RECOVERED:",accountClient)
-        });
-    });
-*/
 
 
     describe('#meta TX', async function() {
@@ -142,14 +155,14 @@ contract("BouncerProxy", async (accounts) => {
             let addressBouncerProxy = handlerOfBouncerProxy.address;
 
 
-            
+                                                                                        // ganache 에 0 번째 주소 사용해서 메소드 호출, 대리자
             var data = (new web3.eth.Contract(abiKingToken, addressKingToken)).methods.registerArticle(accounts[0]).encodeABI()
             //var data = (new web3.eth.Contract(abiKingToken, addressKingToken)).methods.addAmount(5).encodeABI()
             //var data = handlerOfExample.addAmount(5).encodeABI();     // 이거는 작동 안함
-            console.log("DATA:",data)
+            console.log("DATA: ",data)
 
             //const nonce = await BouncerProxy.deployed().then(instance => instance.nonce.call(accounts[0]));
-            const nonce = await handlerOfBouncerProxy.nonce.call(accounts[0]);
+            const nonce = await handlerOfBouncerProxy.nonce.call(accounts[0]);  // BouncerProxy owner 주소로 호출
             console.log("nonce : ", nonce);
 
         // const { soliditySha3 } = require('web3-utils');
@@ -158,7 +171,7 @@ contract("BouncerProxy", async (accounts) => {
             const rewardAmount = 0;
             const parts = [
                 addressBouncerProxy,
-                accounts[0],                        // 여기도 바꿈
+                accounts[0],                        // BouncerProxy owner 주소로 호출
                 addressKingToken,
                 web3.utils.toTwosComplement(0),
                 data,
@@ -170,7 +183,7 @@ contract("BouncerProxy", async (accounts) => {
             const hashOfMessage = web3.utils.soliditySha3(...parts);
             const message = hashOfMessage;
 
-            let sig = await web3.eth.sign(message, accounts[0]) // 다른 주소로 수행
+            let sig = await web3.eth.sign(message, accounts[0]) // BouncerProxy owner 주소로 호출
 
             console.log("message: "+message+" sig: ",sig)
 
@@ -181,8 +194,30 @@ contract("BouncerProxy", async (accounts) => {
             
 
             const result = await handlerOfBouncerProxy.forward(sig, accounts[0], addressKingToken, 0, data, rewardAddress, rewardAmount);
-        //   console.log("result : ", result)
+        
             printTxResult(result)
+           
+           // 아래 이벤트는 에러 발생하고 안되네요.          
+        /*    handlerOfBouncerProxy.contract.events.LogMessage({}, function(err, event) {
+                console.log('event : ', event)
+                console.log('err : ', err)
+            })
+            .on('error', console.error);
+
+            handlerOfBouncerProxy.contract.events.allEvents('LogMessage',{  }, (err, event) => {
+                console.log('err : ', err)
+                console.log('event : ', event)
+            })  */
+
+            // 이벤트 처리는 getPastEvents() 만 됨
+            handlerOfBouncerProxy.contract.getPastEvents('LogMessage',{  }, (err, event) => {
+                console.log('err : ', err)
+                console.log('event : ', event)
+            })
+
+
+
+            
         })
 
         // 체크 KingToken count 변화된 결과
