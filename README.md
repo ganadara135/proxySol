@@ -1,8 +1,8 @@
 
 # 작동 방식                                                             <br>
-##  가정 :   클라이언트에서 게시글 등록 요청을 하며 보낼 메시지와 시그니처 값을 전달, 릴레이 컨트렉트에서는 넘겨중 메시지를 풀어서 시그니처 검증후에 KingToken 에 게시글 등록 메소드 호출. <br>
+##  가정 :   클라이언트에서 게시글 등록 요청을 하며, 보낼 메시지와 시그니처 값을 전달, 릴레이 컨트렉트에서는 넘겨중 메시지를 풀어서 시그니처 검증후에 KingToken 에 게시글 등록 메소드 호출. <br>
 
-0) 중계 역할하는 Backend 서버가 필요에 따라서 BouncerProxy, KingToken 호출        <br>
+0) 중계 역할하는 Backend 서버가 필요에 따라서 BouncerProxy 호출                  <br>
 1) BouncerProxy.sol 가 중계에 필요한 기능 제공                                 <br>
 2) KingToken.sol 토큰에 관한 기능 제공                                       <br>
 3) 게시판 등록시 KingToken 의 registerArticle()  메소드 호출,                  <br>
