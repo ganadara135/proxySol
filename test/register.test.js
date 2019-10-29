@@ -140,7 +140,7 @@ contract("BouncerProxy", async (accounts) => {
 
 
     describe('#meta TX', async function() {
-        it("should build meta transaction into data, sign it as account[0] and send it as account[0] ", async function() {
+        it("meta TX 검증", async function() {
         //    this.timeout(60000)
             
             // let abiExample = await Example.deployed().then(instance => instance.abi);
@@ -214,26 +214,10 @@ contract("BouncerProxy", async (accounts) => {
                 console.log('err : ', err)
                 console.log('event : ', event)
             })
-
-
-
             
         })
-
-        // 체크 KingToken count 변화된 결과
-        // describe('#addressKingToken count 체크', function() {
-        //     it("count ", () => {
-        //         KingToken.deployed()
-        //         .then(instance => instance.count())
-        //         .then(count => {
-        //             assert.equal(count, 5, "count is changed");
-        //         })
-        //         .catch( e => {
-        //             console.log(e);
-        //         });
-        //     });
-        // });
     })
+
 
     const tab = "\t\t";
     function printTxResult(result){
