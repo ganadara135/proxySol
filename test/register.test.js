@@ -24,38 +24,7 @@ const should = require('chai')
     .use(require('chai-bignumber')(BigNumber))
     .should()
 
-    /*  클라이언트에서 sign  값 만들기 테스트
-contract.only('Example', async function (accounts) {
-    beforeEach(async function () {
-        this.contract = await Example.new();
-    })
-   // const handlerOfExample = await Example.deployed();
-
-    it("ecrecover: should pass", async function () {
-       //const message = EthUtil.sha3('Message to sign here.')
-       //const message = EthUtil.sha256('Message to sign here.')
-       const message = EthUtil.keccak256('Message to sign here.')
-        const signature = await EthUtil.ecsign(message, new Buffer('907570bfd5e48faa71b59fd6d48c9d12dfd639ff0c5f715e9211feb7abfa5edf', 'hex') )
-
-        //console.log("signature : ", signature.yellow)
-        const recoveredAddress = await this.contract.ecrecoverCustom(
-        //const recoveredAddress = await handlerOfExample.methods.ecrecoverCustom(
-            '0x' + message.toString('hex'),
-            signature.v,
-            '0x' + signature.r.toString('hex'),
-            '0x' + signature.s.toString('hex'))//.send({from: accounts[0], gas:1000000 });
-
-        recoveredAddress.should.be.equal('0x5e54317f3599ea5d026baaca7d9857abeca9c01d', 'The recovered address should match the signing address')
-        //console.log("recoveredAddress : ", recoveredAddress.red);
-    })
-});
-*/
-
-
-
-
-
-
+    
 
 contract("KingToken", (accounts) => {
     describe('#KingToken 작동여부 체크', function() {
@@ -94,35 +63,70 @@ contract("KingToken", (accounts) => {
     });
     console.log("계좌 비교 원본 : ", accounts[5])
     console.log("계좌 비교 생성 : ", accountClient)
-    // 위 계좌 비교가 통과하면 아래 메소드를 실행
+    
 */    
 
+ //  게시판 글 등록금 대납자 검증
+ contract.only('BouncerProxy', async function (accounts) {
+    beforeEach(async function () {
+        this.contract = await BouncerProxy.new();
+    })
+    //const handlerOfExample = await Example.deployed();        // 이거는 제대로 instance 생성하지 못함
 
+    it("호출요청자 검증", async function () {
+       //const message = EthUtil.sha3('Message to sign here.')
+       //const message = EthUtil.sha256('Message to sign here.')
+        const message = await EthUtil.keccak256('Message to sign here.')
+        const signature = await EthUtil.ecsign(message, new Buffer('b0fa901a6e44c8b030ef45cd58bf124f90a7e4c660c78550fec868d3bb3a0288', 'hex') )
+
+        //console.log("signature : ", signature.yellow)
+        const recoveredAddress = await this.contract.ecrecoverCustom(
+      //  const recoveredAddress = await handlerOfExample.contract.methods.ecrecoverCustom(
+            '0x' + message.toString('hex'),
+            signature.v,
+            '0x' + signature.r.toString('hex'),
+            '0x' + signature.s.toString('hex'))//.send({from: accounts[0], gas:1000000 });
+
+        recoveredAddress.should.be.equal('0x4900e556e41080E355e0B4c31B7820c63B1f3C86', 'The recovered address should match the signing address')
+        //console.log("recoveredAddress : ", recoveredAddress.red);
+    })
+});
 
 
 contract("BouncerProxy", async (accounts) => {
 
+    // let abiExample = await Example.deployed().then(instance => instance.abi);
+    // let addressExample = await Example.deployed().then(instance => instance.address);
+    // let abiBouncerProxy = await BouncerProxy.deployed().then(instance => instance.abi);
+    // let addressBouncerProxy = await BouncerProxy.deployed().then(instance => instance.address);
+    const handlerOfBouncerProxy = await BouncerProxy.deployed();
+    const handlerOfKingToken = await KingToken.deployed();
+    let abiKingToken = handlerOfKingToken.abi;
+    let addressKingToken = handlerOfKingToken.address;
+    let abiBouncerProxy = handlerOfBouncerProxy.abi;
+    let addressBouncerProxy = handlerOfBouncerProxy.address;
 
-    // 백엔드 서버에서 할 일
-    describe('#호출요청자 검증', async function() {
-      //  console.log(accounts)
-        it("시그니처 검증", async function() {
+    // 이 부분은 위에서 처리함
+    // describe('#호출요청자 검증', async function() {
+    //   //  console.log(accounts)
+    //     it("시그니처 검증", async function() {
 
-            // 게시판 쪽에서 할 행위 가정한 데이터 message,  signature
-            const message = await EthUtil.keccak256('Message to sign here.')          // return Buffer
-            const signature = await EthUtil.ecsign(message, new Buffer('e38b4379f0f60e1a0cd3ef420bb99ab87408aca197ed364df05ed8431027bc18', 'hex') ) // return Object
-                                                                    // ganache 에 5 번째 주소 사용해서 메소드 호출 account[5]
-            accountClient = web3.eth.accounts.recover({
-                messageHash: web3.utils.bytesToHex(message),
-                r: web3.utils.bytesToHex(signature.r),
-                s: web3.utils.bytesToHex(signature.s),
-                v: web3.utils.toHex(signature.v)
-            });
-            accountClient.should.be.equal(accounts[5], 'The recovered address should match the signing address')
-        });
-    })
-
-
+    //         // 게시판 쪽에서 할 행위 가정한 데이터 message,  signature
+    //         const message = await EthUtil.keccak256('Message to sign here.')          // return Buffer
+    //         const signature = await EthUtil.ecsign(message, new Buffer('0e36f7232b6e57c06e651bcc673da94680bc35cfbdf329a7a7b952302e8d8544', 'hex') ) // return Object
+    //                                                                 // ganache 에 5 번째 주소 사용해서 메소드 호출 account[5]
+    //         console.log("signature : ", signature)
+    //         accountClient = web3.eth.accounts.recover({
+    //             messageHash: web3.utils.bytesToHex(message),
+    //             r: web3.utils.bytesToHex(signature.r),
+    //             s: web3.utils.bytesToHex(signature.s),
+    //             v: web3.utils.toHex(signature.v)
+    //         });
+    //         accountClient.should.be.equal(accounts[5], 'The recovered address should match the signing address')
+    //     });
+    // })
+    
+ 
     // 화이트리스트에 등록되었는지 확인,
     describe('#BouncerProxy 작동여부 체크', async function() {
         it("whitelist msg.sender 체크", () => {
@@ -137,33 +141,19 @@ contract("BouncerProxy", async (accounts) => {
         });
     });
 
-
-
     describe('#meta TX', async function() {
         it("meta TX 검증", async function() {
         //    this.timeout(60000)
             
-            // let abiExample = await Example.deployed().then(instance => instance.abi);
-            // let addressExample = await Example.deployed().then(instance => instance.address);
-            // let abiBouncerProxy = await BouncerProxy.deployed().then(instance => instance.abi);
-            // let addressBouncerProxy = await BouncerProxy.deployed().then(instance => instance.address);
-            const handlerOfBouncerProxy = await BouncerProxy.deployed();
-            const handlerOfKingToken = await KingToken.deployed();
-            let abiKingToken = handlerOfKingToken.abi;
-            let addressKingToken = handlerOfKingToken.address;
-            let abiBouncerProxy = handlerOfBouncerProxy.abi;
-            let addressBouncerProxy = handlerOfBouncerProxy.address;
-
-
                                                                                         // ganache 에 0 번째 주소 사용해서 메소드 호출, 대리자
             var data = (new web3.eth.Contract(abiKingToken, addressKingToken)).methods.registerArticle(accounts[0]).encodeABI()
             //var data = (new web3.eth.Contract(abiKingToken, addressKingToken)).methods.addAmount(5).encodeABI()
             //var data = handlerOfExample.addAmount(5).encodeABI();     // 이거는 작동 안함
-            console.log("DATA: ",data)
+   //         console.log("DATA: ",data)
 
             //const nonce = await BouncerProxy.deployed().then(instance => instance.nonce.call(accounts[0]));
             const nonce = await handlerOfBouncerProxy.nonce.call(accounts[0]);  // BouncerProxy owner 주소로 호출
-            console.log("nonce : ", nonce);
+  //          console.log("nonce : ", nonce);
 
         // const { soliditySha3 } = require('web3-utils');
             // web3.utils.soliditySha3()
@@ -185,8 +175,7 @@ contract("BouncerProxy", async (accounts) => {
 
             let sig = await web3.eth.sign(message, accounts[0]) // BouncerProxy owner 주소로 호출
 
-            console.log("message: "+message+" sig: ",sig)
-
+ //           console.log("message: "+message+" sig: ",sig)
 
             
         //   const hashResult = await handlerOfBouncerProxy.getHash(accounts[0], addressExample, 0, data, rewardAddress, rewardAmount)

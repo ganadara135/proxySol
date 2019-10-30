@@ -10308,10 +10308,322 @@
       "links": {},
       "address": "0xcD1B90a210E9Ae96f878E8C728acA1e45EE0150B",
       "transactionHash": "0x5540f768d95d539736e28cf7f7fc858edc4d978e17f74a36fdcfe3853cf4d7cc"
+    },
+    "1572353154237": {
+      "events": {
+        "0x08b2c0469ecd1d7a21d7e1492f0fc75fc7e8e0fa4fdf4275949c90875f5ebdf5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_value",
+              "type": "bool"
+            }
+          ],
+          "name": "UpdateWhitelist",
+          "type": "event",
+          "signature": "0x08b2c0469ecd1d7a21d7e1492f0fc75fc7e8e0fa4fdf4275949c90875f5ebdf5"
+        },
+        "0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Received",
+          "type": "event",
+          "signature": "0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874"
+        },
+        "0x8af70b0ed436507ccd91d4eb236d41cf6375ce679b4a1bbd19365795dd198c9b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "what",
+              "type": "address"
+            }
+          ],
+          "name": "LogMessage",
+          "type": "event",
+          "signature": "0x8af70b0ed436507ccd91d4eb236d41cf6375ce679b4a1bbd19365795dd198c9b"
+        },
+        "0x6d4a868d9686051f889f61dc96415c0809f248cd6ce33eb543ff445b972084fe": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sig",
+              "type": "bytes"
+            },
+            {
+              "indexed": false,
+              "name": "signer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "destination",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "data",
+              "type": "bytes"
+            },
+            {
+              "indexed": false,
+              "name": "rewardToken",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "rewardAmount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_hash",
+              "type": "bytes32"
+            }
+          ],
+          "name": "Forwarded",
+          "type": "event",
+          "signature": "0x6d4a868d9686051f889f61dc96415c0809f248cd6ce33eb543ff445b972084fe"
+        }
+      },
+      "links": {},
+      "address": "0x3682C3Fdc129584dE257de234F4b14Cb571d09dA",
+      "transactionHash": "0x3287d7210fa96f09966002347cb610aac69fd158677f0e8141c797a5217d7641"
+    },
+    "1572353799040": {
+      "events": {
+        "0x08b2c0469ecd1d7a21d7e1492f0fc75fc7e8e0fa4fdf4275949c90875f5ebdf5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_value",
+              "type": "bool"
+            }
+          ],
+          "name": "UpdateWhitelist",
+          "type": "event",
+          "signature": "0x08b2c0469ecd1d7a21d7e1492f0fc75fc7e8e0fa4fdf4275949c90875f5ebdf5"
+        },
+        "0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Received",
+          "type": "event",
+          "signature": "0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874"
+        },
+        "0x8af70b0ed436507ccd91d4eb236d41cf6375ce679b4a1bbd19365795dd198c9b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "what",
+              "type": "address"
+            }
+          ],
+          "name": "LogMessage",
+          "type": "event",
+          "signature": "0x8af70b0ed436507ccd91d4eb236d41cf6375ce679b4a1bbd19365795dd198c9b"
+        },
+        "0x6d4a868d9686051f889f61dc96415c0809f248cd6ce33eb543ff445b972084fe": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sig",
+              "type": "bytes"
+            },
+            {
+              "indexed": false,
+              "name": "signer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "destination",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "data",
+              "type": "bytes"
+            },
+            {
+              "indexed": false,
+              "name": "rewardToken",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "rewardAmount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_hash",
+              "type": "bytes32"
+            }
+          ],
+          "name": "Forwarded",
+          "type": "event",
+          "signature": "0x6d4a868d9686051f889f61dc96415c0809f248cd6ce33eb543ff445b972084fe"
+        }
+      },
+      "links": {},
+      "address": "0x3B825bb37FC7691A0D0219d778D928ada2CE9611",
+      "transactionHash": "0x7544820ba19f37fed9eb11f8007c0ea7563f87217aaa6172008517d0f2e09b43"
+    },
+    "1572405894454": {
+      "events": {
+        "0x08b2c0469ecd1d7a21d7e1492f0fc75fc7e8e0fa4fdf4275949c90875f5ebdf5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_value",
+              "type": "bool"
+            }
+          ],
+          "name": "UpdateWhitelist",
+          "type": "event",
+          "signature": "0x08b2c0469ecd1d7a21d7e1492f0fc75fc7e8e0fa4fdf4275949c90875f5ebdf5"
+        },
+        "0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Received",
+          "type": "event",
+          "signature": "0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874"
+        },
+        "0x8af70b0ed436507ccd91d4eb236d41cf6375ce679b4a1bbd19365795dd198c9b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "what",
+              "type": "address"
+            }
+          ],
+          "name": "LogMessage",
+          "type": "event",
+          "signature": "0x8af70b0ed436507ccd91d4eb236d41cf6375ce679b4a1bbd19365795dd198c9b"
+        },
+        "0x6d4a868d9686051f889f61dc96415c0809f248cd6ce33eb543ff445b972084fe": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "sig",
+              "type": "bytes"
+            },
+            {
+              "indexed": false,
+              "name": "signer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "destination",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "data",
+              "type": "bytes"
+            },
+            {
+              "indexed": false,
+              "name": "rewardToken",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "rewardAmount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_hash",
+              "type": "bytes32"
+            }
+          ],
+          "name": "Forwarded",
+          "type": "event",
+          "signature": "0x6d4a868d9686051f889f61dc96415c0809f248cd6ce33eb543ff445b972084fe"
+        }
+      },
+      "links": {},
+      "address": "0xbDB5ce42E00cA19156C1F702cd3303e46E71Bc6b",
+      "transactionHash": "0x9839c02d6cd120da82a0750cb1d10c4c21f332c1767253b1f601c65e482b44a2"
     }
   },
   "schemaVersion": "3.0.16",
-  "updatedAt": "2019-10-29T12:10:20.946Z",
+  "updatedAt": "2019-10-30T03:26:05.728Z",
   "devdoc": {
     "methods": {}
   },
