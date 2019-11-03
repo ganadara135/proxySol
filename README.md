@@ -24,7 +24,7 @@
 \> node -v      // 버전 체크, 안 바뀔수가 있으면, 현재 truffle 은  node version 10.1^.0 에서 정상 작동함   <br>
 \> npm i                                                                    <br>
 \> npm i --unsafe-perm -g truffle                                           <br>
-\> truffle develop                                                          <br>
+\> truffle develop   // 이것보단 아래 truffle console + ganache 로 가동                                 <br>
 \> npm i -g ganache-cli
 <br>
 
@@ -36,8 +36,9 @@
 \>> truffle console --network development                                 <br>
 \>> compile                                                                  <br>
 \>> migrate --reset                                                              <br>
-\>> test                                                                     <br>
+\>> test                   // test 폴더 밑에 *.js 실행                                              <br>
 
 
 ##  truffle 테스트 결과 캡처
+<img width="1111" alt="registerArtcle event" src="https://user-images.githubusercontent.com/24896007/68085300-e0122580-fe82-11e9-87d4-80322f48818b.png">
 ![test capture](https://user-images.githubusercontent.com/24896007/67766404-b4adc600-fa91-11e9-9fa3-292b7beeb821.png)

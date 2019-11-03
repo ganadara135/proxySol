@@ -20,6 +20,7 @@ contract KingToken is ERC20Mintable {
   uint public count = 0;
 
   event Register(address _writer, uint256 _amount);
+  event LogMessage2 (address what, address _from, uint _amount, address _allowedCaller, address owner);
 
   // Airdrop
   mapping (address => uint256) public airDropHistory;
@@ -50,14 +51,19 @@ contract KingToken is ERC20Mintable {
 
 
   //  게시글 등록시 호출하는 메소드, 게시글 등록시에 50 토큰이 차감됨
-  function registerArticle(address _to)  public returns (bool) {
-    require(_to != address(0),"ERC20: using from the zero address");
-    require(balanceOf(_to) > feeOfregister, "Not enough token");
+  function registerArticle(address _from, uint _amount, address _allowedCaller)  public returns (bool) {
+    require(_from != address(0),"ERC20: using from the zero address");
+    require(balanceOf(_from) > feeOfregister, "Not enough token");
+    require(_allowedCaller == owner, "허용된 호출자가 아님");   // 시그니처로 검증해야 하나 간단하게 했습니다
+
+    emit LogMessage2(msg.sender, _from, _amount, _allowedCaller, owner);
+
 
     //_balances[_to] = _balances[_to].sub(50);    // 50  토큰 차감 (KingToken)
-    _burn(_to, feeOfregister);
+    _burn(_from, feeOfregister);
+    //_burn(_from, _amount);
 
-    emit Register(_to, feeOfregister);  // 첫번재 인자는 Null
+    emit Register(_from, feeOfregister);  // 첫번재 인자는 Null
     return true;
   }
 

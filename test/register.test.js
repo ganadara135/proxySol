@@ -17,7 +17,7 @@ const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'
 //////////  위에 web3.eth.personal.sign() 이 작동이 안돼서 ethereumjs-util.ecsign() 으로 변경
 const EthUtil = require('ethereumjs-util')
 
-const Example = artifacts.require("Example.sol");
+//const Example = artifacts.require("Example.sol");
 const BigNumber = web3.BigNumber
 const should = require('chai')
     .use(require('chai-as-promised'))
@@ -26,7 +26,7 @@ const should = require('chai')
 
     
 
-contract("KingToken", (accounts) => {
+contract("KingToken", async (accounts) => {
     describe('#KingToken 작동여부 체크', function() {
         it("이름호출 ", () => {
             KingToken.deployed()
@@ -39,6 +39,32 @@ contract("KingToken", (accounts) => {
                 console.log(e);
             });
         });
+    });
+
+    const handlerOfKingTokenMy = await KingToken.deployed();
+    let abiKingTokenMy = handlerOfKingTokenMy.abi;
+    let addressKingTokenMy = handlerOfKingTokenMy.address;
+
+    const kingTokenInstance = new web3.eth.Contract(abiKingTokenMy, addressKingTokenMy);
+
+    // KingToken 에어드랍
+    describe('#KingToken 에어드랍 체크', async function() {
+        it("accounts[3]에 에어드랍", async () => {
+            await kingTokenInstance.methods.mintAirDrop(accounts[3], 1000).send({from: accounts[0]})
+            .on('transactionHash', function(hash) {
+                //console.log(receipt);
+                //hash.should.be.equal()
+                assert.equal(hash.length,'0xe1a69685ae0c4babaceba3c77ca8b9bf0ec70c5cb53a3d8c99b13edc00abfde9'.length,"32바이트 길이가 아님")
+            }).on('error', console.error);    
+        });
+
+        it("accounts[3] 토큰 잔액 확인", async () => {
+            await kingTokenInstance.methods.balanceOf(accounts[3]).call({from: accounts[0]})
+            .then( function(result){
+              //  console.log("잔액할당결과 : ", result)
+                result.should.be.equal('1000', "할당 잔액이 같지 않음")
+            }).catch( e => console.log(e));
+        })
     });
 });
 
@@ -67,7 +93,7 @@ contract("KingToken", (accounts) => {
 */    
 
  //  게시판 글 등록금 대납자 검증
- contract.only('BouncerProxy', async function (accounts) {
+ contract('BouncerProxy', async function (accounts) {
     beforeEach(async function () {
         this.contract = await BouncerProxy.new();
     })
@@ -129,8 +155,8 @@ contract("BouncerProxy", async (accounts) => {
  
     // 화이트리스트에 등록되었는지 확인,
     describe('#BouncerProxy 작동여부 체크', async function() {
-        it("whitelist msg.sender 체크", () => {
-            BouncerProxy.deployed()
+        it("whitelist msg.sender 체크", async () => {
+            await BouncerProxy.deployed()
             .then(instance => instance.whitelist.call(accounts[0]))
             .then( result => {
                 assert.equal(result,true,"accounts[0] 가 화이트리스트에 작동권한 없음")
@@ -141,50 +167,45 @@ contract("BouncerProxy", async (accounts) => {
         });
     });
 
+
+
+
     describe('#meta TX', async function() {
         it("meta TX 검증", async function() {
         //    this.timeout(60000)
-            
-                                                                                        // ganache 에 0 번째 주소 사용해서 메소드 호출, 대리자
-            var data = (new web3.eth.Contract(abiKingToken, addressKingToken)).methods.registerArticle(accounts[0]).encodeABI()
-            //var data = (new web3.eth.Contract(abiKingToken, addressKingToken)).methods.addAmount(5).encodeABI()
-            //var data = handlerOfExample.addAmount(5).encodeABI();     // 이거는 작동 안함
-   //         console.log("DATA: ",data)
+        const tokenAmountForRegister = 50;
+                                                                            // ganache 에 0 번째 주소 사용해서 메소드 호출, 대리자
+        var data = await (new web3.eth.Contract(abiKingToken, addressKingToken)).methods.registerArticle(accounts[3], tokenAmountForRegister, accounts[0]).encodeABI()
+        //var data = (new web3.eth.Contract(abiKingToken, addressKingToken)).methods.addAmount(5).encodeABI()
+        //var data = handlerOfExample.addAmount(5).encodeABI();     // 이거는 작동 안함
 
-            //const nonce = await BouncerProxy.deployed().then(instance => instance.nonce.call(accounts[0]));
-            const nonce = await handlerOfBouncerProxy.nonce.call(accounts[0]);  // BouncerProxy owner 주소로 호출
-  //          console.log("nonce : ", nonce);
 
-        // const { soliditySha3 } = require('web3-utils');
-            // web3.utils.soliditySha3()
-            const rewardAddress = "0x0000000000000000000000000000000000000000"          //  보상을 안 받음
-            const rewardAmount = 0;
-            const parts = [
-                addressBouncerProxy,
-                accounts[0],                        // BouncerProxy owner 주소로 호출
-                addressKingToken,
-                web3.utils.toTwosComplement(0),
-                data,
-                rewardAddress,
-                web3.utils.toTwosComplement(rewardAmount),
-                web3.utils.toTwosComplement(nonce),
-            ]
-        // console.log("PARTS",parts)
-            const hashOfMessage = web3.utils.soliditySha3(...parts);
-            const message = hashOfMessage;
+        const nonce = await handlerOfBouncerProxy.nonce.call(accounts[3]);  // BouncerProxy owner 주소로 호출
 
-            let sig = await web3.eth.sign(message, accounts[0]) // BouncerProxy owner 주소로 호출
+    
+        // const rewardAddress = "0x0000000000000000000000000000000000000000"          //  보상을 안 받음
+        // const rewardAmount = 0;
+        const parts = [
+            addressBouncerProxy,
+            accounts[0],                        // BouncerProxy owner 주소로 호출
+            addressKingToken,
+            web3.utils.toTwosComplement(0),
+            data,
+            //rewardAddress,
+            //web3.utils.toTwosComplement(rewardAmount),
+            web3.utils.toTwosComplement(nonce),
+        ]
 
- //           console.log("message: "+message+" sig: ",sig)
+        const hashOfMessage = web3.utils.soliditySha3(...parts);
+        const message = hashOfMessage;
 
-            
-        //   const hashResult = await handlerOfBouncerProxy.getHash(accounts[0], addressExample, 0, data, rewardAddress, rewardAmount)
-        //   console.log("hashResult : ", hashResult)
-            
+        let sig = await web3.eth.sign(message, accounts[0]) // BouncerProxy owner 주소로 호출
+    
+    //   const hashResult = await handlerOfBouncerProxy.getHash(accounts[0], addressExample, 0, data, rewardAddress, rewardAmount)
 
-            const result = await handlerOfBouncerProxy.forward(sig, accounts[0], addressKingToken, 0, data, rewardAddress, rewardAmount);
-        
-            printTxResult(result)
+        const result = await handlerOfBouncerProxy.forward(sig, accounts[0], addressKingToken, 0, data);
+    
+        printTxResult(result)
            
            // 아래 이벤트는 에러 발생하고 안되네요.          
         /*    handlerOfBouncerProxy.contract.events.LogMessage({}, function(err, event) {
@@ -199,7 +220,11 @@ contract("BouncerProxy", async (accounts) => {
             })  */
 
             // 이벤트 처리는 getPastEvents() 만 됨
-            handlerOfBouncerProxy.contract.getPastEvents('LogMessage',{  }, (err, event) => {
+            // handlerOfBouncerProxy.contract.getPastEvents('LogMessage',{  }, (err, event) => {
+            //     console.log('err : ', err)
+            //     console.log('event : ', event)
+            // })
+            await handlerOfKingToken.contract.getPastEvents('LogMessage2',{  }, (err, event) => {
                 console.log('err : ', err)
                 console.log('event : ', event)
             })

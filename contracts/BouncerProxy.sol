@@ -14,7 +14,7 @@ contract BouncerProxy {
 
   event UpdateWhitelist(address _account, bool _value);
   event Received (address indexed sender, uint value);
-  event LogMessage (address what);
+  //event LogMessage (address what);
 
   function () external payable {
     emit Received(msg.sender, msg.value);
@@ -27,51 +27,39 @@ contract BouncerProxy {
     return true;
   }
 
-  function getHash(address signer, address destination, uint value, bytes memory data, address rewardToken, uint rewardAmount)
+  function getHash(address signer, address destination, uint value, bytes memory data)
   public view returns(bytes32){
-    return keccak256(abi.encodePacked(address(this), signer, destination, value, data, rewardToken, rewardAmount, nonce[signer]));
+    return keccak256(abi.encodePacked(address(this), signer, destination, value, data, nonce[signer]));
   }
 
-  function forward(bytes memory sig, address signer, address destination, uint value, bytes memory data, address rewardToken, uint rewardAmount) public {
+   //        forward(sig,              accounts[0],    addressKingToken,    0,           data);
+  function forward(bytes memory sig, address signer, address destination, uint value, bytes memory data) public {
       // msg.sender log to see
-      emit LogMessage(msg.sender);
+     // emit LogMessage(msg.sender);
       
       //the hash contains all of the information about the meta transaction to be called
-      bytes32 _hash = getHash(signer, destination, value, data, rewardToken, rewardAmount);
+      bytes32 _hash = getHash(signer, destination, value, data);
       //increment the hash so this tx can't run again
       nonce[signer]++;
       //this makes sure signer signed correctly AND signer is a valid bouncer
       require(signerIsWhitelisted(_hash,sig),"BouncerProxy::forward Signer is not whitelisted");
-      //make sure the signer pays in whatever token (or ether) the sender and signer agreed to
-      // or skip this if the sender is incentivized in other ways and there is no need for a token
-      // 이 부분은 현재 프로젝트에는 필요치 않음
-      if(rewardAmount>0){
-        //Address 0 mean reward with ETH
-        if(rewardToken==address(0)){
-          //REWARD ETHER
-          //require(msg.sender.call.value(rewardAmount)(''),'Not enough for gas');
-          //require(msg.sender.call.value(rewardAmount)(""),"ppp");
-          require(msg.sender.send(rewardAmount),"block send reward");
-
-        }else{
-          //REWARD TOKEN
-          require((StandardToken(rewardToken)).transfer(msg.sender,rewardAmount));
-        }
-      }
+      
       //execute the transaction with all the given parameters
       require(executeCall(destination, value, data));
-      emit Forwarded(sig, signer, destination, value, data, rewardToken, rewardAmount, _hash);
+      emit Forwarded(sig, signer, destination, value, data, _hash);
   }
   // when some frontends see that a tx is made from a bouncerproxy, they may want to parse through these events to find out who the signer was etc
-  event Forwarded (bytes sig, address signer, address destination, uint value, bytes data,address rewardToken, uint rewardAmount,bytes32 _hash);
+  event Forwarded (bytes sig, address signer, address destination, uint value, bytes data, bytes32 _hash);
 
 
   function executeCall(address to, uint256 value, bytes memory data) internal returns (bool success) {
     assembly {
-    // call(g, a, v, in, insize, out, outsize)	
+    // call(g, a, v, in, insize, out, outsize)    
     // call contract at address a with input mem[in..(in+insize)) providing g gas and v wei and
     // output area mem[out..(out+outsize)) returning 0 on error  (eg. out of gas) and 1 on success
+    // a 컨트랙트를 v wei 값으로 호출, 호출자는 in+insize 의 주소임, 결과값을 out+outsize 로 전달
        success := call(gas, to, value, add(data, 0x20), mload(data), 0, 0)
+       // 0x20(EOA) 이  to(Contract Address) 를 호출함. 필요한 가스 비용은 0x20 이 충당
     }
   }
 
@@ -115,6 +103,7 @@ contract BouncerProxy {
   }
 }
 
+// 현재 자체 토큰 사용중으로 필요없음
 contract StandardToken {
   function transfer(address _to,uint256 _value) public returns (bool) { }
 }
